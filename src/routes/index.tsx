@@ -3,14 +3,13 @@ import React, { lazy, FC } from "react";
 import Dashboard from "@/pages/dashboard";
 import LoginPage from "@/pages/login";
 import LayoutPage from "@/pages/layout";
-import WrapperRouteComponent from "./config";
+import WrapperRouteComponent from "./auth";
 import { useRoutes, RouteObject } from "react-router-dom";
-import RouteItem from "@/models/route.interface";
-import SuspendFallbackLoading from "@/pages/layout/suspendFallbackLoading";
+import SettingPage from "@/pages/setting";
 
 const NotFound = lazy(() => import("@/pages/404"));
 
-export const LocalRouteList: RouteItem[] = [
+const LocalRouteList: RouteObject[] = [
   {
     path: "/",
     element: (
@@ -21,21 +20,15 @@ export const LocalRouteList: RouteItem[] = [
     children: [
       {
         path: "/dashboard",
-        name: "面板",
-        icon: "heart",
-        element: (
-          <WrapperRouteComponent>
-            <Dashboard />
-          </WrapperRouteComponent>
-        ),
+        element: <Dashboard />,
+      },
+      {
+        path: "/setting",
+        element: <SettingPage />,
       },
       {
         path: "*",
-        element: (
-          <WrapperRouteComponent>
-            <NotFound />
-          </WrapperRouteComponent>
-        ),
+        element: <NotFound />,
       },
     ],
   },

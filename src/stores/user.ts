@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-import { LoginParams, Role } from "@/models/login";
+import { Role } from "@/models/login";
 import { Locale, User } from "@/models/user";
 import { getGlobalState } from "@/models";
 

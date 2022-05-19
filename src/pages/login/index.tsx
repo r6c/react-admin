@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Button, Card, Checkbox, Form, Input, Spin } from "antd";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { LoginParams } from "@/models/login";
@@ -15,7 +15,7 @@ const initialValues: LoginParams = {
   // remember: true
 };
 
-const LoginForm: FC = () => {
+const LoginForm: React.FC = () => {
   const loginMutation = useLogin();
   const navigate = useNavigate();
   const location = useLocation() as any;
@@ -24,15 +24,12 @@ const LoginForm: FC = () => {
 
   const onFinished = async (form: LoginParams) => {
     const result = await loginMutation.mutateAsync(form);
-    console.log("result: ", result);
 
     if (result) {
       localStorage.setItem("token", result.token);
       localStorage.setItem("username", result.username);
 
-      const from = location.state?.from || { pathname: "/dashboard" };
-
-      console.log(from);
+      const from = location.state?.from || "/dashboard";
       navigate(from);
     }
   };

@@ -64,7 +64,14 @@ axios.interceptors.response.use(
         // 清除本地token和清空vuex中token对象
         // 跳转登录页面
         case 403:
-          window.location.href = "/login";
+          notification.error({
+            message: `登录信息校验失败`,
+            description: error.response.data?.msg || "Error",
+            placement: "top",
+          });
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 2000);
           break;
         // 404请求不存在
         case 404:

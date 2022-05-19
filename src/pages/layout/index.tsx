@@ -14,6 +14,7 @@ import RightContent from "./components/RightContent";
 import { ReactComponent as LogoSvg } from "@/assets/logo/logo.svg";
 import styles from "./index.module.less";
 import Footer from "./components/Footer";
+import { LocalMenulist } from "@/routes/config";
 
 const IconMap: { [key: string]: React.ReactNode } = {
   smile: <SmileOutlined />,
@@ -23,48 +24,7 @@ const IconMap: { [key: string]: React.ReactNode } = {
 
 const LayoutPage: FC = ({ children }) => {
   // const { data: menuList, error } = useGetCurrentMenus();
-  const menulist = [
-    {
-      path: "/dashboard",
-      name: "面板",
-      locale: "menu.dashboard",
-      icon: "heart",
-    },
-    {
-      path: "/project",
-      name: "Project",
-      icon: "smile",
-      locale: "menu.project",
-      children: [
-        {
-          path: "/project/list",
-          name: "Project List",
-          locale: "menu.project.list",
-          icon: "smile",
-        },
-      ],
-    },
-    {
-      path: "/permission",
-      name: "permission",
-      locale: "menu.permission",
-      icon: "smile",
-      children: [
-        {
-          path: "/permission/list",
-          name: "permission list",
-          locale: "menu.permission.list",
-          icon: "smile",
-        },
-      ],
-    },
-    {
-      path: "/404",
-      name: "404",
-      locale: "menu.notfound",
-      icon: "frown",
-    },
-  ];
+  const menuList = LocalMenulist;
 
   const [user, setUser] = useAtom(userState);
   const [pathname, setPathname] = useState("/welcome");
@@ -174,7 +134,7 @@ const LayoutPage: FC = ({ children }) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      menuDataRender={() => loopMenuItem(menulist)}
+      menuDataRender={() => loopMenuItem(menuList)}
       // menuDataRender={() => m}
       rightContentRender={() => <RightContent />}
       footerRender={() => <Footer />}

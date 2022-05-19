@@ -29,6 +29,9 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
     // Note: There may be security issues, please note
     if (location.pathname !== "/login") {
       navigate("/login", {
